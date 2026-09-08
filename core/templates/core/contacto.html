@@ -1,0 +1,16 @@
+{%extends 'base.html'%}
+
+{% load static %}
+
+{% block titulo %} Contacto {% endblock %}
+
+<!-- afecta solo a este HTML -->
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'core/css/index.css' %}">
+{% endblock %}
+
+
+<!-- Contenido de este html -->
+{%block content%}
+    <h1>Contacto</h1>
+{%endblock%}

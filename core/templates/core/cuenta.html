@@ -1,0 +1,47 @@
+{%extends 'base.html'%}
+
+{% load static %}
+
+<!-- Heredar titulo -->
+{% block titulo %} {{ block.super }} Hola {{ user.first_name }} {% endblock %}
+
+<!-- afecta solo a este HTML -->
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'core/css/index.css' %}">
+<link rel="stylesheet" href="{% static 'core/css/cuenta.css' %}">
+{% endblock %}
+
+
+<!-- Contenido de este html -->
+{%block content%}
+
+<div class="d-flex justify-content-center">
+
+    <div class="d-flex flex-column align-items-center p-4 mt-4 fondo">
+
+        <h1>Infomación general</h1>
+        {% if user.avatar %}
+        <div class="m-2">
+            <img class="avatar-img" src="{{ user.avatar.url }}" alt="Avatar del usuario">
+        </div>
+        {% else %}
+            <img class="avatar-img" src="{% static 'img/cuenta.png' %}" alt="Avatar del usuario">
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Guardar</button>
+        </form>
+
+        <a class="btn btn-primary" href="{% url 'autenticacion:cambiar-password'%}">Cambiar contraseña</a>
+
+    </div>
+
+</div>
+
+
+
+
+
+{%endblock%}

@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+
+{% load static %}
+
+<!-- Heredar titulo -->
+{% block titulo %}  {{ block.super }} Home{% endblock %}
+
+<!-- afecta solo a este HTML -->
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'core/css/index.css' %}">
+{% endblock %}
+
+
+<!-- Contenido de este html -->
+{%block content%}
+    {% if user.is_authenticated %}
+        <h1>Bienvenido, {{user.get_full_name }}</h1>
+
+    {% else %}
+        <h1>Bienvenido</h1>
+    {% endif %}
+    
+{%endblock%}

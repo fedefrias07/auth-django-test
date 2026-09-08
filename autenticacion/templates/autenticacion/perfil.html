@@ -1,0 +1,17 @@
+{%extends 'autenticacion/base-auth.html'%}
+
+
+{%block content%}
+
+<h1>estas viendo tu perfil</h1>
+
+{% if user.is_authenticated %}
+
+    <a class="btn btn-primary" href="{% url 'cambiar-contrasena' %}">Cambiar contraseña</a> 
+
+    <a class="btn btn-primary" href="{% url 'cerrar-sesion' %}">Cerrar sesión</a> 
+
+{%endif%}
+
+
+{%endblock%}

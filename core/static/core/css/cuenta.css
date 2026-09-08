@@ -1,0 +1,18 @@
+body {
+    color: black;
+}
+
+.fondo {
+    background-color: rgb(223, 223, 223);
+    width: 600px;
+    border-radius: 20px;
+}
+
+.avatar-img {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  object-fit: cover; /* evita que se deforme si no es cuadrada */
+}
+
+
