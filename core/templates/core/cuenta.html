@@ -15,7 +15,7 @@
 <!-- Contenido de este html -->
 {%block content%}
 
-<div class="d-flex justify-content-center">
+<div class="d-flex flex-column align-items-center justify-content-center">
 
     <div class="d-flex flex-column align-items-center p-4 mt-4 fondo">
 
@@ -25,7 +25,7 @@
             <img class="avatar-img" src="{{ user.avatar.url }}" alt="Avatar del usuario">
         </div>
         {% else %}
-            <img class="avatar-img" src="{% static 'img/cuenta.png' %}" alt="Avatar del usuario">
+        <img class="avatar-img" src="{% static 'img/cuenta.png' %}" alt="Avatar del usuario">
         {% endif %}
 
         <form method="post" enctype="multipart/form-data">
@@ -38,7 +38,16 @@
 
     </div>
 
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} mt-3">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
 </div>
+
 
 
 

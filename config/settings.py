@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'autenticacion',
     'cloudinary_storage',
     'cloudinary',
+    'tareas',
 ]
 
 # MUY IMPORTANTE: debe definirse ANTES de la primera migración
