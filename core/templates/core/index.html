@@ -14,9 +14,12 @@
 <!-- Contenido de este html -->
 {%block content%}
     {% if user.is_authenticated %}
-        <h1>Bienvenido, {{user.get_full_name }}</h1>
-        <a class="btn btn-success" href="{% url 'tareas' %}">Lista de tareas</a>
 
+        <div class="container d-flex flex-column justify-content-center align-items-center mt-4">
+            <h1>Bienvenido, {{user.get_full_name }}</h1>
+            <a class="btn btn-success" href="{% url 'tareas' %}">Lista de tareas</a>
+        </div>
+       
     {% else %}
         <h1>Bienvenido</h1>
     {% endif %}

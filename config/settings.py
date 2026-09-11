@@ -52,9 +52,9 @@ AUTH_USER_MODEL = 'autenticacion.UsuarioCustom'
 
 
 # URLs de redirección
-LOGIN_URL          = '/autenticacion/login/'
+LOGIN_URL          = '/auth/login'
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/autenticacion/login/'
+LOGOUT_REDIRECT_URL = '/auth/login'
 
 # Conexion Cloudinary
 CLOUDINARY_STORAGE = {

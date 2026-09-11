@@ -1,0 +1,9 @@
+.fondo {
+    background-color: rgb(0, 0, 0);
+    width: 600px;
+    border-radius: 20px;
+}
+
+.font {
+    color: rgb(253, 253, 253);
+}
