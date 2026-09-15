@@ -31,3 +31,21 @@ def crear_tarea(request):
 
     return render(request, "tareas/crear-tarea.html")
 
+@login_required
+def cambiar_estado(request, id):
+    tarea = Tareas.objects.get(id=id)
+
+    tarea.completada = not tarea.completada
+    tarea.save()
+
+    return redirect("tareas")
+
+
+@login_required
+def eliminar_tarea(request, id):
+    tarea = Tareas.objects.get(id=id)
+
+    tarea.delete()
+
+    return redirect("tareas")
+

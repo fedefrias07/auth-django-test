@@ -6,19 +6,28 @@
     <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
         <h1>Lista Tareas</h1>
         <div>
-            <a class="btn btn-success" href="{% url 'crear_tarea' %}">Crear tarea</a>
+            <a class="btn btn-success" href="{% url 'crear_tarea' %}"><strong>Crear tarea</strong></a>
         </div>
-        
+
     </div>
 
     {%if lista%}
     <div>
-        <table class="table table-bordered border-primary">
+        <table class="table table-bordered border-primary text-center align-middle">
+
+            <colgroup>
+                <col style="width: 300px;">
+                <col style="width: 150px;">
+                <col style="width: 150px;">
+                <col style="width: 150px;">
+            </colgroup>
+
             <thead>
                 <tr>
                     <th>Nombre</th>
                     <th>Completada</th>
                     <th>Creacion</th>
+                    <th >Accion</th>
                 </tr>
             </thead>
 
@@ -26,12 +35,63 @@
                 {%for tarea in lista%}
                 <tr>
                     <td>{{tarea.titulo}}</td>
-                    <td>{{tarea.completada}}</td>
-                    <td>{{tarea.create_at}}</td>
+                    <td>
+                        <form method="POST" action="{% url 'cambiar_estado' tarea.id %}">
+                            {% csrf_token %}
+                            <input class="form-check-input" type="checkbox" style="width: 25px; height: 25px;" name="completada" onchange="this.form.submit()" 
+                            {%if tarea.completada%} checked {%endif%} >
+                        </form>
+                    </td>
+                    <td>{{ tarea.create_at|date:"d/m H:i" }}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#modalEliminar{{ tarea.id }}">
+                            Eliminar
+                        </button>
+
+                        {%comment%}
+                        <form method="POST" action="{% url 'eliminar_tarea' tarea.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                        {%endcomment%}
+                    </td>
                 </tr>
+                <div class="modal fade" id="modalEliminar{{ tarea.id }}" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title">Eliminar tarea</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                ¿Estás seguro de que querés eliminar la tarea
+                                <strong>{{ tarea.titulo }}</strong>?
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Cancelar
+                                </button>
+
+                                <form method="POST" action="{% url 'eliminar_tarea' tarea.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">
+                                        Eliminar
+                                    </button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
                 {%endfor%}
             </tbody>
         </table>
+
 
         {% if messages %}
         {% for message in messages %}
@@ -44,7 +104,7 @@
     </div>
 
     {%else%}
-        <p>No tenes tareas!</p>
+    <p>No tenes tareas!</p>
     {%endif%}
 
 
